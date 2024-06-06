@@ -1,12 +1,19 @@
-
 header{
     display: flex;
     height: 80px;
     border: 1px solid black;
     align-items: center;
 }
-.container{
-    /*width: 35%;*/
+.head_left{
+    width: 50%;
+    text-align: left;
+    border: 1px solid black;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+.head_right{
+    width: 50%;
+    text-align: right;
     border: 1px solid black;
     padding-left: 1em;
     padding-right: 1em;
