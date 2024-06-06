@@ -1,7 +1,43 @@
-.container {
-	display: grid;
-    grid-template-columns: 30% 40% 30%;
-}
-.item{
+.content {
+	display: flex;
     border: 1px solid black;
+    align-items: center;
+}
+
+h1{
+    align-items: center;
+    border: 1px solid black;
+}
+
+button{
+    background-color: white;
+    border: 0px;
+}
+/*
+ボタン押した時色が変わる
+*/
+button:active {
+    background-color: #ffbf00;
+}
+
+select{
+    height: 40px;
+    width: 350px;
+}
+
+#img_item{
+    width: 50px;
+    height: 50px;
+    border: 1px solid black;
+}
+.item_right{
+    width: 50%;
+    border: 1px solid black;
+    text-align: right;
+    
+}
+.item_left{
+    width: 50%;
+    border: 1px solid black;
+    text-align: left;
 }

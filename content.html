@@ -7,16 +7,41 @@
     <link rel="stylesheet" type="text/css" href="css/content.css">
 </head>
 <body>
-    <div class="container">
-        <div class="item">A</div>
-        <div class="item">B</div>
-        <div class="item">C</div>
-        <div class="item">D</div>
-        <div class="item">E</div>
-        <div class="item">F</div>
-        <div class="item">G</div>
-        <div class="item">H</div>
-        <div class="item">I</div>
+    <div class="content">
+        <div class="item_left">
+        <h1>&nbsp;<img id="img_item" src="img/visualstudiocode.svg" alt="error" >監視操作</h1>
+        </div>
+        <div class="item_right">
+        ||
+        <button>フロア</button>
+        ||
+        <button>リスト</button>
+        ||
+        <button>ステータスリスト</button>
+        ||&nbsp;
+        </div>
+    </div>
+    <div class="content">
+        <div class="item_left">
+            <select>
+                <!--
+                JSで値を決める
+                フロア名称が20文字以上超える場合、裏の部分を省略し残り「…」と表示する。
+                -->
+                <option value="1">1F</option>
+                <option value="2">2F</option>
+                <option value="3">3F</option>
+                <option value="4">4F</option>
+            </select>
+        </div>
+        <div class="item_right">
+            <!--
+            JSで値を決める。
+            全部選択中の時表示値が「操作可能ユニット全部解除」で変わる。
+            緊急停止中の時は「選択不可」に変更し、グレーアウトで表示する。
+            -->
+            <button>操作可能ユニット全部選択</button>
+        </div>
     </div>
 </body>
 </html>
