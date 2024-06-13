@@ -1,7 +1,7 @@
 .content {
 	display: flex;
     border: 1px solid black;
-    align-items: center;
+    /*align-items: center;*/
 }
 
 h1{
@@ -56,3 +56,4 @@ select,option{
     height: 500px;
     width: 95%;
 }
+

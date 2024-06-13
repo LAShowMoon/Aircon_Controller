@@ -1,5 +1,5 @@
-// XML 파일을 불러오는 함수
-function loadXMLDoc(filename) {
+ // XML 파일을 불러오는 함수
+ function loadXMLDoc(filename) {
     return new Promise((resolve, reject) => {
         const xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
@@ -28,10 +28,12 @@ async function displayImages() {
             const y = parseInt(images[i].getAttribute('y'));
 
             const img = document.createElement('img');
-            img.setAttribute('src', `images/${src}`);
+            img.setAttribute('src', `${src}`);
             img.setAttribute('class', 'image');
             img.style.left = `${x}px`;
             img.style.top = `${y}px`;
+            //img.width = '50px';
+            //img.height = '50px';
 
             imageContainer.appendChild(img);
         }

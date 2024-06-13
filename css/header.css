@@ -4,6 +4,9 @@ header{
     border: 1px solid black;
     align-items: center;
 }
+img{
+    padding: 0.5em;
+}
 .head_left{
     width: 50%;
     text-align: left;
