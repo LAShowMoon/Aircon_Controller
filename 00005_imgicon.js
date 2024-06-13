@@ -1,4 +1,4 @@
- // XML 파일을 불러오는 함수
+ // XMLファイルを呼んでくる
  function loadXMLDoc(filename) {
     return new Promise((resolve, reject) => {
         const xhttp = new XMLHttpRequest();
@@ -14,7 +14,7 @@
     });
 }
 
-// XML 파일을 불러와서 이미지를 추가하는 함수
+// XMLファイルを呼んできて、イメージを追加する関数。
 async function displayImages() {
     try {
         const xmlDoc = await loadXMLDoc('xml/images.xml');
