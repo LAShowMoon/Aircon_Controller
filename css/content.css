@@ -57,3 +57,11 @@ select,option{
     width: 95%;
 }
 
+#imageContainer {
+    position: relative;
+}
+.image {
+    position: absolute;
+    width: 60px;  
+    height: 80px; 
+}
