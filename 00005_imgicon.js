@@ -15,7 +15,7 @@
 }
 
 // XMLファイルを呼んできて、イメージを追加する関数。
-async function displayFloorIconSetting() {
+async function displayFloorIconSetting(selectedFloor) {
     try {
         const xmlImagres = await loadXMLDoc('xml/images.xml');
         const images = xmlImagres.getElementsByTagName('floorImg');//xml 자료의 제일 앞부분 id정의쪽
@@ -24,6 +24,7 @@ async function displayFloorIconSetting() {
         const models = xmlModel.getElementsByTagName('ctrl');
 
         const imageContainer = document.getElementById('imageContainer');
+        imageContainer.innerHTML = ''; //既存のイメージとテキストを消します。
 
         for (let i = 0; i < images.length; i++) {
             const imageGroup = images[i].getAttribute('Group');
@@ -31,7 +32,7 @@ async function displayFloorIconSetting() {
             for (let o = 0; o < models.length; o++) {
                 const modelGroup = models[o].getAttribute('Group');
 
-                if (imageGroup === modelGroup) {
+                if (imageGroup === modelGroup && imageGroup === selectedFloor) {
                     const src = images[i].getAttribute('src');
                     const x = parseInt(images[i].getAttribute('x'));
                     const y = parseInt(images[i].getAttribute('y'));
@@ -54,6 +55,7 @@ async function displayFloorIconSetting() {
 
                     imageContainer.appendChild(img);
                     imageContainer.appendChild(tempText);
+                    
                 }
             }
         }
@@ -69,12 +71,15 @@ async function floorSystemSetting() {
         const floors = xmlFloors.getElementsByTagName('floorSetting');//xml 자료의 제일 앞부분 id정의쪽
         const floorSet = document.getElementById('floorSet');
 
-        const xmlFloorCon = await loadXMLDoc('xml/floorConnect.xml');
-        const floorCon = xmlFloorCon.getElementsByTagName('floorConnect');
+
         
         const select = document.createElement('select');
         //여기서 onchange는 변경된 직후가 아니라 변경 후 포커스가 벗어났을 때 이벤트를 발생시킨다.
         //그러기 때문에 oninput를 사용하여 값이 바뀔 때마다 이벤트를 발생시킨다.
+        select.onchange = function(){
+            const selectedFloor = select.value;
+            displayFloorIconSetting(selectedFloor);
+        }
         
 
         for (let i = 0; i < floors.length; i++) {
