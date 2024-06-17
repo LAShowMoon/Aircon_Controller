@@ -1,0 +1,6 @@
+<floorSet>
+    <floorSetting floor="1" floorName="1F" />
+    <floorSetting floor="2" floorName="2F" />
+    <floorSetting floor="3" floorName="3F" />
+    <floorSetting floor="4" floorName="4階" />
+</floorSet>

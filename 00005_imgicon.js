@@ -18,7 +18,7 @@
 async function displayFloorIconSetting() {
     try {
         const xmlImagres = await loadXMLDoc('xml/images.xml');
-        const images = xmlImagres.getElementsByTagName('floor');//xml 자료의 제일 앞부분 id정의쪽
+        const images = xmlImagres.getElementsByTagName('floorImg');//xml 자료의 제일 앞부분 id정의쪽
 
         const xmlModel = await loadXMLDoc('xml/model.xml');
         const models = xmlModel.getElementsByTagName('ctrl');
@@ -36,6 +36,7 @@ async function displayFloorIconSetting() {
                     const x = parseInt(images[i].getAttribute('x'));
                     const y = parseInt(images[i].getAttribute('y'));
                     const temp = parseInt(models[o].getAttribute('temp'));
+                    const model = models[o].getAttribute('model');
 
                     //イメージ呼び出し
                     const img = document.createElement('img');
@@ -46,10 +47,10 @@ async function displayFloorIconSetting() {
 
                     //モデル情報呼び出し
                     const tempText = document.createElement('p');
-                    tempText.textContent = `Temp: ${temp}°C`;
+                    tempText.textContent = `Temp: ${temp}°C / Model:${model}`;
                     tempText.style.position = 'absolute';
                     tempText.style.left = `${x}px`;
-                    tempText.style.top = `${y + 100}px`; // Adjust position as needed
+                    tempText.style.top = `${y + 70}px`; // Adjust position as needed
 
                     imageContainer.appendChild(img);
                     imageContainer.appendChild(tempText);
@@ -60,33 +61,41 @@ async function displayFloorIconSetting() {
         console.error(error);
     }
 }
-/*
-async function displayFloorModelSetting() {
+//階層のXMLを呼び出し、出力。
+// XMLファイルを呼んできて、イメージを追加する関数。
+async function floorSystemSetting() {
     try {
-        const xmlDoc = await loadXMLDoc('xml/images.xml');
-        const images = xmlDoc.getElementsByTagName('floor');//xml의 제일 앞부분 
+        const xmlFloors = await loadXMLDoc('xml/floorSet.xml');
+        const floors = xmlFloors.getElementsByTagName('floorSetting');//xml 자료의 제일 앞부분 id정의쪽
+        const floorSet = document.getElementById('floorSet');
 
-        const imageContainer = document.getElementById('imageContainer');
+        const xmlFloorCon = await loadXMLDoc('xml/floorConnect.xml');
+        const floorCon = xmlFloorCon.getElementsByTagName('floorConnect');
+        
+        const select = document.createElement('select');
+        //여기서 onchange는 변경된 직후가 아니라 변경 후 포커스가 벗어났을 때 이벤트를 발생시킨다.
+        //그러기 때문에 oninput를 사용하여 값이 바뀔 때마다 이벤트를 발생시킨다.
+        
 
-        for (let i = 0; i < images.length; i++) {
-            const src = images[i].getAttribute('src');
-            const x = parseInt(images[i].getAttribute('x'));
-            const y = parseInt(images[i].getAttribute('y'));
+        for (let i = 0; i < floors.length; i++) {
+            const floor = floors[i].getAttribute('floor');
+            const floorName = floors[i].getAttribute('floorName');
 
-            const img = document.createElement('img');
-            img.setAttribute('src', `${src}`);
-            img.setAttribute('class', 'image');
-            img.style.left = `${x}px`;
-            img.style.top = `${y}px`;
-            //img.width = '50px';
-            //img.height = '50px';
-
-            imageContainer.appendChild(img);
+            const option = document.createElement('option');
+            option.value = floor;
+            option.textContent = floorName; 
+            //floorName.length > 20 ? `${floorName.substring(0, 17)}...` : floorName;
+            //このように文字数の制限ができる。
+            select.appendChild(option);
         }
+        
+        floorSet.appendChild(select);
     } catch (error) {
         console.error(error);
     }
 }
-*/
-// 페이지가 로드되면 이미지를 표시
-window.onload = displayFloorIconSetting;
+// ページがロードされるとイメージとテキストを呼び出す。
+window.onload = function() {
+    floorSystemSetting();
+    displayFloorIconSetting();
+};

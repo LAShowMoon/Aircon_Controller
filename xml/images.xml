@@ -1,3 +1,6 @@
 <images>
-    <floor Group="1" src="image_icon/home_icon.png" x="750" y="200" />
+    <floorImg Group="1" src="image_icon/modelIcon/air_icon.png" x="550" y="200" />
+    <floorImg Group="2" src="image_icon/modelIcon/air_icon.png" x="450" y="100" />
+    <floorImg Group="3" src="image_icon/modelIcon/air_icon.png" x="350" y="300" />
+    <floorImg Group="4" src="image_icon/modelIcon/air_icon.png" x="250" y="400" />
 </images>

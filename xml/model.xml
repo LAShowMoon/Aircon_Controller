@@ -1,3 +1,6 @@
 <Groups>
-    <ctrl Group="1" model="AIR" temp="26" />
+    <ctrl Group="1" model="AIR"  temp="26" error="OFF" HighTemp="" lowTemp=""  />
+    <ctrl Group="2" model="AIR"  temp="26" error="OFF" HighTemp="" lowTemp=""  />
+    <ctrl Group="3" model="AIR"  temp="26" error="OFF" HighTemp="" lowTemp=""  />
+    <ctrl Group="4" model="AIR"  temp="26" error="OFF" HighTemp="" lowTemp=""  />
 </Groups>

@@ -6,7 +6,8 @@
     <title>Document</title>
     <link rel="stylesheet" type="text/css" href="css/content.css">
 </head>
-
+<!--<script src="00006_floorSet.js" defer></script>-->
+<script src="00005_imgicon.js" defer></script>
 <body>
     <div class="content">
         <div class="item_left">
@@ -24,16 +25,7 @@
     </div>
     <div class="content">
         <div class="item_left">
-            <select>
-                <!--
-                JSで値を決める
-                フロア名称が20文字以上超える場合、裏の部分を省略し残り「…」と表示する。
-                -->
-                <option value="1">1F</option>
-                <option value="2">2F</option>
-                <option value="3">3F</option>
-                <option value="4">4F</option>
-            </select>
+            <div id="floorSet"></div>
         </div>
         <div class="item_right">
             <!--
@@ -58,8 +50,6 @@
             <img id="img_item" src="image_icon/visualstudiocode.svg" alt="error" >
         </div>
         <div class="main_body">
-            
-            <script src="00005_imgicon.js"></script>
             <div id="imageContainer" >
             </div>
         </div>
