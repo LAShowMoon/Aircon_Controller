@@ -76,7 +76,7 @@ async function floorSystemSetting() {
         const select = document.createElement('select');
         //여기서 onchange는 변경된 직후가 아니라 변경 후 포커스가 벗어났을 때 이벤트를 발생시킨다.
         //그러기 때문에 oninput를 사용하여 값이 바뀔 때마다 이벤트를 발생시킨다.
-        select.onchange = function(){
+        select.oninput = function(){
             const selectedFloor = select.value;
             displayFloorIconSetting(selectedFloor);
         }
