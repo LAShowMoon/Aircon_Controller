@@ -1,6 +1,6 @@
 <floorConnection>
-    <floorCon floor="1" Group="1" />
-    <floorCon floor="2" Group="2" />
-    <floorCon floor="3" Group="3" />
-    <floorCon floor="4" Group="4" />
-<floorConnection/>
+    <floorCont Group="1" floor="1" x="550" y="200" />
+    <floorCont Group="2" floor="2" x="450" y="100" />
+    <floorCont Group="3" floor="3" x="350" y="300" />
+    <floorCont Group="4" floor="4" x="250" y="400" />
+</floorConnection>

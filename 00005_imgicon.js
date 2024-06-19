@@ -3,6 +3,7 @@
     return new Promise((resolve, reject) => {
         const xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
+            console.log(this.readyState);
             if (this.readyState == 4 && this.status == 200) {
                 resolve(this.responseXML);
             } else if (this.readyState == 4) {
@@ -17,8 +18,9 @@
 // XMLファイルを呼んできて、イメージを追加する関数。
 async function displayFloorIconSetting(selectedFloor) {
     try {
-        const xmlImagres = await loadXMLDoc('xml/images.xml');
-        const images = xmlImagres.getElementsByTagName('floorImg');//xml 자료의 제일 앞부분 id정의쪽
+        const xmlImagres = await loadXMLDoc('xml/floorConnect.xml');
+        //document.write(xmlImagres)
+        const images = xmlImagres.getElementsByTagName('floorCont');
 
         const xmlModel = await loadXMLDoc('xml/model.xml');
         const models = xmlModel.getElementsByTagName('ctrl');
@@ -31,17 +33,21 @@ async function displayFloorIconSetting(selectedFloor) {
 
             for (let o = 0; o < models.length; o++) {
                 const modelGroup = models[o].getAttribute('Group');
-
+                
+                //groupを比較する。
                 if (imageGroup === modelGroup && imageGroup === selectedFloor) {
-                    const src = images[i].getAttribute('src');
+                    //const src = images[i].getAttribute('src');
                     const x = parseInt(images[i].getAttribute('x'));
                     const y = parseInt(images[i].getAttribute('y'));
                     const temp = parseInt(models[o].getAttribute('temp'));
                     const model = models[o].getAttribute('model');
+                    console.log(model);
+
+                    const icon_src = await icon_distinguish(model);
 
                     //イメージ呼び出し
                     const img = document.createElement('img');
-                    img.setAttribute('src', src);
+                    img.setAttribute('src', icon_src);
                     img.setAttribute('class', 'image');
                     img.style.left = `${x}px`;
                     img.style.top = `${y}px`;
@@ -99,6 +105,26 @@ async function floorSystemSetting() {
         console.error(error);
     }
 }
+
+//아이콘 구별 후 src반환
+async function icon_distinguish(iconNumber){
+    try{
+        const xmlIconNumber = await loadXMLDoc('xml/iconNumber.xml');
+        const IconSet = xmlIconNumber.getElementsByTagName('iconSet');//xml 자료의 제일 앞부분 id정의쪽
+
+        for(let i = 0; i < IconSet.length; i++){
+            const icon = IconSet[i].getAttribute('icon');
+
+            if(iconNumber === icon){
+                const src = IconSet[i].getAttribute('src');
+                return src;
+            }
+        }
+    }catch (error) {
+    console.error(error);
+    }
+}
+
 // ページがロードされるとイメージとテキストを呼び出す。
 window.onload = function() {
     floorSystemSetting();

@@ -1,0 +1,11 @@
+<iconNumber>
+    <iconSet icon ="AIR" src="image_icon/modelIcon/air_icon.png" />
+    <iconSet icon ="AIR2" src="image_icon/modelIcon/air2_icon.png" />
+    <iconSet icon ="DE" src="image_icon/modelIcon/dehumidifier_icon.png" />
+    <iconSet icon ="FZ" src="image_icon/modelIcon/freezer_icon.png" />
+    <iconSet icon ="ERROR" src="image_icon/modelIcon/modelER_icon.png" />
+    <iconSet icon ="OD" src="image_icon/modelIcon/outdoor-unit_icon.png" />
+    <iconSet icon ="RA" src="image_icon/modelIcon/radiator_icon.png" />
+    <iconSet icon ="VEN" src="image_icon/modelIcon/ventilation_icon.png" />
+    <iconSet icon ="WT" src="image_icon/modelIcon/water-heater_icon.png" />
+</iconNumber>
