@@ -2,5 +2,5 @@
     <ctrl Group="1" model="AIR" temp="26" error="OFF" HighTemp="" lowTemp=""  />
     <ctrl Group="2" model="AIR2" temp="26" error="OFF" HighTemp="" lowTemp=""  />
     <ctrl Group="3" model="DE" temp="26" error="OFF" HighTemp="" lowTemp=""  />
-    <ctrl Group="4" model="FZ" temp="26" error="OFF" HighTemp="" lowTemp=""  />
+    <ctrl Group="4" model="" temp="26" error="ON" HighTemp="" lowTemp=""  />
 </Groups>

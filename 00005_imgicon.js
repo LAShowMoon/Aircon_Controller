@@ -18,14 +18,13 @@
 // XMLファイルを呼んできて、イメージを追加する関数。
 async function displayFloorIconSetting(selectedFloor) {
     try {
-        const xmlImagres = await loadXMLDoc('xml/floorConnect.xml');
-        //document.write(xmlImagres)
-        const images = xmlImagres.getElementsByTagName('floorCont');
+        const xmlImages = await loadXMLDoc('xml/floorConnect.xml');
+        const images = xmlImages.getElementsByTagName('floorCont');
 
         const xmlModel = await loadXMLDoc('xml/model.xml');
         const models = xmlModel.getElementsByTagName('ctrl');
 
-        const imageContainer = document.getElementById('imageContainer');
+        const imageContainer = document.getElementById('imageContainer'); 
         imageContainer.innerHTML = ''; //既存のイメージとテキストを消します。
 
         for (let i = 0; i < images.length; i++) {
@@ -41,9 +40,10 @@ async function displayFloorIconSetting(selectedFloor) {
                     const y = parseInt(images[i].getAttribute('y'));
                     const temp = parseInt(models[o].getAttribute('temp'));
                     const model = models[o].getAttribute('model');
+                    const modelerror = models[o].getAttribute('error');
                     console.log(model);
 
-                    const icon_src = await icon_distinguish(model);
+                    const icon_src = await icon_distinguish(model,modelerror);
 
                     //イメージ呼び出し
                     const img = document.createElement('img');
@@ -61,7 +61,7 @@ async function displayFloorIconSetting(selectedFloor) {
 
                     imageContainer.appendChild(img);
                     imageContainer.appendChild(tempText);
-                    
+
                 }
             }
         }
@@ -87,7 +87,7 @@ async function floorSystemSetting() {
             displayFloorIconSetting(selectedFloor);
         }
         
-
+        
         for (let i = 0; i < floors.length; i++) {
             const floor = floors[i].getAttribute('floor');
             const floorName = floors[i].getAttribute('floorName');
@@ -107,13 +107,18 @@ async function floorSystemSetting() {
 }
 
 //아이콘 구별 후 src반환
-async function icon_distinguish(iconNumber){
+async function icon_distinguish(iconNumber,error){
     try{
         const xmlIconNumber = await loadXMLDoc('xml/iconNumber.xml');
         const IconSet = xmlIconNumber.getElementsByTagName('iconSet');//xml 자료의 제일 앞부분 id정의쪽
 
         for(let i = 0; i < IconSet.length; i++){
             const icon = IconSet[i].getAttribute('icon');
+
+            if(error === "ON" && icon === "ERROR"){
+                const src = IconSet[i].getAttribute('src');
+                return src;
+            }
 
             if(iconNumber === icon){
                 const src = IconSet[i].getAttribute('src');
