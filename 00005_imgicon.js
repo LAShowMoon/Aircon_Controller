@@ -41,27 +41,35 @@ async function displayFloorIconSetting(selectedFloor) {
                     const temp = parseInt(models[o].getAttribute('temp'));
                     const model = models[o].getAttribute('model');
                     const modelerror = models[o].getAttribute('error');
-                    console.log(model);
-
-                    const icon_src = await icon_distinguish(model,modelerror);
-
+                    console.log(modelerror);
+                    let icon_src = '';
+                    if(modelerror === "ON"){
+                        icon_src = await iconError();
+                    }else{
+                        icon_src = await icon_distinguish(model);
+                    }
+                     
                     //イメージ呼び出し
+                    const button = document.createElement('button');
+                    button.style.position = 'absolute';
+                    button.style.border = '1px solid';
+                    button.style.left = `${x}px`;
+                    button.style.top = `${y}px`;
+
                     const img = document.createElement('img');
                     img.setAttribute('src', icon_src);
                     img.setAttribute('class', 'image');
-                    img.style.left = `${x}px`;
-                    img.style.top = `${y}px`;
+                    button.appendChild(img);
 
                     //モデル情報呼び出し
                     const tempText = document.createElement('p');
                     tempText.textContent = `Temp: ${temp}°C / Model:${model}`;
-                    tempText.style.position = 'absolute';
-                    tempText.style.left = `${x}px`;
-                    tempText.style.top = `${y + 70}px`; // Adjust position as needed
+                    //tempText.style.position = 'absolute';
+                    //tempText.style.left = `${x}px`;
+                    tempText.style.top = `80px`;
+                    button.appendChild(tempText);
 
-                    imageContainer.appendChild(img);
-                    imageContainer.appendChild(tempText);
-
+                    imageContainer.appendChild(button);
                 }
             }
         }
@@ -77,8 +85,6 @@ async function floorSystemSetting() {
         const floors = xmlFloors.getElementsByTagName('floorSetting');//xml 자료의 제일 앞부분 id정의쪽
         const floorSet = document.getElementById('floorSet');
 
-
-        
         const select = document.createElement('select');
         //여기서 onchange는 변경된 직후가 아니라 변경 후 포커스가 벗어났을 때 이벤트를 발생시킨다.
         //그러기 때문에 oninput를 사용하여 값이 바뀔 때마다 이벤트를 발생시킨다.
@@ -86,7 +92,6 @@ async function floorSystemSetting() {
             const selectedFloor = select.value;
             displayFloorIconSetting(selectedFloor);
         }
-        
         
         for (let i = 0; i < floors.length; i++) {
             const floor = floors[i].getAttribute('floor');
@@ -107,7 +112,7 @@ async function floorSystemSetting() {
 }
 
 //아이콘 구별 후 src반환
-async function icon_distinguish(iconNumber,error){
+async function icon_distinguish(iconNumber){
     try{
         const xmlIconNumber = await loadXMLDoc('xml/iconNumber.xml');
         const IconSet = xmlIconNumber.getElementsByTagName('iconSet');//xml 자료의 제일 앞부분 id정의쪽
@@ -115,12 +120,25 @@ async function icon_distinguish(iconNumber,error){
         for(let i = 0; i < IconSet.length; i++){
             const icon = IconSet[i].getAttribute('icon');
 
-            if(error === "ON" && icon === "ERROR"){
+            if(iconNumber === icon){
                 const src = IconSet[i].getAttribute('src');
                 return src;
             }
+        }
+    }catch (error) {
+    console.error(error);
+    }
+}
 
-            if(iconNumber === icon){
+async function iconError(){
+    try{
+        const xmlIconNumber = await loadXMLDoc('xml/iconNumber.xml');
+        const IconSet = xmlIconNumber.getElementsByTagName('iconSet');//xml 자료의 제일 앞부분 id정의쪽
+
+        for(let i = 0; i < IconSet.length; i++){
+            const icon = IconSet[i].getAttribute('icon');
+
+            if(icon === "ERROR"){
                 const src = IconSet[i].getAttribute('src');
                 return src;
             }

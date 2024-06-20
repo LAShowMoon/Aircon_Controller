@@ -11,7 +11,7 @@ h1{
 
 button{
     background-color: white;
-    border: 0px;
+    border: 1px solid black;
 }
 /*
 ボタン押した時色が変わる
@@ -35,33 +35,40 @@ select,option{
     height: 50px;
     border: 1px solid black;
 }
+
 .item_right{
     width: 50%;
     border: 1px solid black;
     text-align: right;
     
 }
+
 .item_left{
     width: 50%;
     border: 1px solid black;
     text-align: left;
 }
+
 .filter_icon{
     border: 1px solid black;
+    text-align: center;
+    padding: 1em;
     height: 500px;
-    width: 5%;
+    width: 80px;
 }
+
 .main_body{
     border: 1px solid black;
-    height: 500px;
-    width: 95%;
+    width: 10000px;
+    height: 1000px;
 }
 
 #imageContainer {
     position: relative;
 }
+
 .image {
-    position: absolute;
+    /*position: absolute;*/
     width: 60px;  
     height: 80px; 
 }
