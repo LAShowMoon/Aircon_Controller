@@ -3,4 +3,8 @@
     <ctrl Group="2" model="AIR2" temp="26" error="OFF" HighTemp="" lowTemp=""  />
     <ctrl Group="3" model="DE" temp="26" error="OFF" HighTemp="" lowTemp=""  />
     <ctrl Group="4" model="OD" temp="26" error="ON" HighTemp="" lowTemp=""  />
+    <ctrl Group="5" model="FZ" temp="26" error="OFF" HighTemp="" lowTemp=""  />
+    <ctrl Group="6" model="RA" temp="26" error="OFF" HighTemp="" lowTemp=""  />
+    <ctrl Group="7" model="VEN" temp="26" error="ON" HighTemp="" lowTemp=""  />
+    <ctrl Group="8" model="" temp="26" error="OFF" HighTemp="" lowTemp=""  />
 </Groups>

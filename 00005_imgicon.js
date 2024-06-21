@@ -25,23 +25,26 @@ async function displayFloorIconSetting(selectedFloor) {
         const models = xmlModel.getElementsByTagName('ctrl');
 
         const imageContainer = document.getElementById('imageContainer'); 
+        const filterButton = document.getElementById('filterButton');
+        filterButton.innerHTML = '';
         imageContainer.innerHTML = ''; //既存のイメージとテキストを消します。
+        
 
         for (let i = 0; i < images.length; i++) {
             const imageGroup = images[i].getAttribute('Group');
+            const imageFloor = images[i].getAttribute('floor');
 
             for (let o = 0; o < models.length; o++) {
                 const modelGroup = models[o].getAttribute('Group');
                 
                 //groupを比較する。
-                if (imageGroup === modelGroup && imageGroup === selectedFloor) {
+                if (imageGroup === modelGroup && imageFloor === selectedFloor) {
                     //const src = images[i].getAttribute('src');
                     const x = parseInt(images[i].getAttribute('x'));
                     const y = parseInt(images[i].getAttribute('y'));
                     const temp = parseInt(models[o].getAttribute('temp'));
                     const model = models[o].getAttribute('model');
                     const modelerror = models[o].getAttribute('error');
-                    console.log(modelerror);
                     let icon_src = '';
                     if(modelerror === "ON"){
                         icon_src = await iconError();
@@ -61,6 +64,15 @@ async function displayFloorIconSetting(selectedFloor) {
                     img.setAttribute('class', 'image');
                     button.appendChild(img);
 
+
+                    //필터버튼 쪽 이미지 출현
+                    const filterBT = document.createElement('button');
+                    const filterimg = document.createElement('img');
+                    filterimg.setAttribute('src', icon_src);
+                    filterimg.setAttribute('class', 'filterimage');
+                    filterBT.appendChild(filterimg);
+                    filterButton.appendChild(filterBT);
+
                     //モデル情報呼び出し
                     const tempText = document.createElement('p');
                     tempText.textContent = `Temp: ${temp}°C / Model:${model}`;
@@ -68,6 +80,15 @@ async function displayFloorIconSetting(selectedFloor) {
                     //tempText.style.left = `${x}px`;
                     tempText.style.top = `80px`;
                     button.appendChild(tempText);
+
+                    //버튼을 눌렀을 때 이미지 노란색으로 변함
+                    button.addEventListener('click', function() {
+                        if (button.style.backgroundColor === 'yellow') {
+                            button.style.backgroundColor = 'white';
+                        } else {
+                            button.style.backgroundColor = 'yellow';
+                        }
+                    });
 
                     imageContainer.appendChild(button);
                 }
@@ -125,11 +146,14 @@ async function icon_distinguish(iconNumber){
                 return src;
             }
         }
+        return 'image_icon/noSignal_icon.png';
     }catch (error) {
     console.error(error);
+    return 'image_icon/noSignal_icon.png';
     }
 }
 
+//모델xml에 에러가 on일경우 기종을 무시하고 에러아이콘 표시
 async function iconError(){
     try{
         const xmlIconNumber = await loadXMLDoc('xml/iconNumber.xml');
@@ -143,8 +167,10 @@ async function iconError(){
                 return src;
             }
         }
+        return 'image_icon/noSignal_icon.png';
     }catch (error) {
     console.error(error);
+    return 'image_icon/noSignal_icon.png';
     }
 }
 
