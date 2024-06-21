@@ -1,3 +1,4 @@
+
  // XMLファイルを呼んでくる
  function loadXMLDoc(filename) {
     return new Promise((resolve, reject) => {
@@ -51,7 +52,6 @@ async function displayFloorIconSetting(selectedFloor) {
                     }else{
                         icon_src = await icon_distinguish(model);
                     }
-                     
                     //イメージ呼び出し
                     const button = document.createElement('button');
                     button.style.position = 'absolute';
@@ -63,7 +63,6 @@ async function displayFloorIconSetting(selectedFloor) {
                     img.setAttribute('src', icon_src);
                     img.setAttribute('class', 'image');
                     button.appendChild(img);
-
 
                     //필터버튼 쪽 이미지 출현
                     const filterBT = document.createElement('button');
@@ -83,13 +82,14 @@ async function displayFloorIconSetting(selectedFloor) {
 
                     //버튼을 눌렀을 때 이미지 노란색으로 변함
                     button.addEventListener('click', function() {
-                        if (button.style.backgroundColor === 'yellow') {
+                        if (button.style.backgroundColor === 'yellow') {//버튼이 노랑색일 때
                             button.style.backgroundColor = 'white';
+                            document.getElementById("controller").style.visibility ='hidden';
                         } else {
-                            button.style.backgroundColor = 'yellow';
+                            button.style.backgroundColor = 'yellow';//버튼이 하얀색일 때 노란색으로 바꿈
+                            document.getElementById("controller").style.visibility ='visible';		
                         }
                     });
-
                     imageContainer.appendChild(button);
                 }
             }
