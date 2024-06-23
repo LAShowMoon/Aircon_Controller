@@ -53,6 +53,7 @@ async function displayFloorIconSetting(selectedFloor) {
                         icon_src = await icon_distinguish(model);
                     }
                     //イメージ呼び出し
+                    //여기서부터 함수로 정리 가능하지 않을까.
                     const button = document.createElement('button');
                     button.style.position = 'absolute';
                     button.style.border = '1px solid';
