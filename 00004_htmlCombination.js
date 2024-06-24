@@ -1,4 +1,4 @@
-//
+//各HTMLを繋げる。
 function combination(url, elementId) {
     fetch(url)
         .then(response => response.text())

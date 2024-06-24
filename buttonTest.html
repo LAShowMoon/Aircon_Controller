@@ -6,71 +6,148 @@
     <title>Document</title>
 </head>
 <body>
-    <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Button Background Toggle</title>
-    <style>
-        .image {
-            width: 50px;
-            height: 50px;
+    <script>// 온도 조절 함수 정의
+        function updateTemperature(delta) {
+            const tempDisplay = document.getElementById('temp');
+            let currentTemp = parseInt(tempDisplay.textContent);
+            currentTemp += delta;
+            tempDisplay.textContent = `${currentTemp}℃`;
         }
-        .filterimage {
-            width: 30px;
-            height: 30px;
-        }
-        .button {
-            position: absolute;
-            border: none;
-            background: none;
-            padding: 0;
-        }
-        .popup {
-            display: none;
-            position: fixed;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            padding: 20px;
-            border: 1px solid #ccc;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-        }
-        .popup input {
-            width: 50px;
-            margin-right: 10px;
-        }
-    </style>
-</head>
-<script>
-function toggleBtn1() {
-  
-  // 토글 할 버튼 선택 (btn1)
-  const btn1 = document.getElementById('btn1');
-  
-  // btn1 숨기기 (display: none)
-  if(btn1.style.display !== 'none') {
-    btn1.style.display = 'none';
-  }
-  // btn` 보이기 (display: block)
-  else {
-    btn1.style.display = 'block';
-  }
-  
-}
-</script>
-<body>
+        
+        // DOM 요소가 로드된 후에 실행되는 함수
+        document.addEventListener('DOMContentLoaded', () => {
+            // 상/하 버튼 요소 가져오기
+            const tempUpButton = document.getElementById('tempUpButton');
+            const tempDownButton = document.getElementById('tempDownButton');
+        
+            // 상 버튼 클릭 이벤트 리스너 추가
+            tempUpButton.addEventListener('click', () => {
+                updateTemperature(1);
+            });
+        
+            // 하 버튼 클릭 이벤트 리스너 추가
+            tempDownButton.addEventListener('click', () => {
+                updateTemperature(-1);
+            });
+        });
+    </script>
+<footer id="controllerSimple">
     <div>
-        <input type='button' value='버튼' id='btn1'/>
-      </div>
-      <div>
-        <input 
-               type='button' 
-               value='이 버튼을 클릭하세요' 
-               id='btn2'
-               onclick='toggleBtn1()'/>
-      </div>
+        <button>
+            <img src="image_icon/controllButton/driveON_button.png">
+        </button>
+        <button>
+            <img src="image_icon/controllButton/driveOFF_button.png">
+        </button>
+    </div>
+    <div>
+        <div id="temp">26℃</div>
+        <div id="tempSetButton">
+            <button id="tempUpButton">上</button>
+            <button id="tempDownButton">下</button>
+        </div>
+    </div>
+    <div>
+        <button>OK</button>
+        <button>キャンセル</button>
+    </div>
+</footer>
 </body>
 </html>
+<!-- 메인 자바스 코드 
+<script>
+import { loadXMLDoc, updateXMLDoc } from './xmlHandler.js';
+// 초기 온도를 설정하는 함수
+async function initializeTemperature() {
+    try {
+        const xmlDoc = await loadXMLDoc('xml/settings.xml');
+        const tempElement = xmlDoc.getElementsByTagName('temperature')[0];
+        const initialTemp = parseInt(tempElement.textContent);
+        document.getElementById('temp').textContent = `${initialTemp}℃`;
+    } catch (error) {
+        console.error('Error loading initial temperature:', error);
+    }
+}
+// 온도 조절 함수 정의
+function updateTemperature(delta) {
+    const tempDisplay = document.getElementById('temp');
+    let currentTemp = parseInt(tempDisplay.textContent);
+    currentTemp += delta;
+    tempDisplay.textContent = `${currentTemp}℃`;
+}
+// 온도 값을 XML에 반영하는 함수
+async function saveTemperature() {
+    const tempDisplay = document.getElementById('temp');
+    const currentTemp = parseInt(tempDisplay.textContent);
+    try {
+        await updateXMLDoc('xml/settings.xml', 'temperature', currentTemp);
+        alert('Temperature updated successfully!');
+    } catch (error) {
+        console.error('Error updating temperature:', error);
+    }
+}
+// DOM 요소가 로드된 후에 실행되는 함수
+document.addEventListener('DOMContentLoaded', () => {
+    // 초기 온도 설정
+    initializeTemperature();
+
+    // 상/하 버튼 요소 가져오기
+    const tempUpButton = document.getElementById('tempUpButton');
+    const tempDownButton = document.getElementById('tempDownButton');
+    const okButton = document.querySelector('button:contains("OK")');
+
+    // 상 버튼 클릭 이벤트 리스너 추가
+    tempUpButton.addEventListener('click', () => {
+        updateTemperature(1);
+    });
+
+    // 하 버튼 클릭 이벤트 리스너 추가
+    tempDownButton.addEventListener('click', () => {
+        updateTemperature(-1);
+    });
+
+    // OK 버튼 클릭 이벤트 리스너 추가
+    okButton.addEventListener('click', saveTemperature);
+});
+</script>
+-->
+
+<!--
+export function loadXMLDoc(filename) {
+    return new Promise((resolve, reject) => {
+        const xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                resolve(this.responseXML);
+            } else if (this.readyState == 4) {
+                reject(new Error('Failed to load XML file'));
+            }
+        };
+        xhttp.open("GET", filename, true);
+        xhttp.send();
+    });
+}
+export function updateXMLDoc(filename, tagName, value) {
+    return new Promise((resolve, reject) => {
+        loadXMLDoc(filename).then(xmlDoc => {
+            const tempElement = xmlDoc.getElementsByTagName(tagName)[0];
+            if (tempElement) {
+                tempElement.textContent = value;
+                const xhttp = new XMLHttpRequest();
+                xhttp.open("POST", filename, true);
+                xhttp.setRequestHeader("Content-Type", "application/xml");
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        resolve();
+                    } else if (this.readyState == 4) {
+                        reject(new Error('Failed to update XML file'));
+                    }
+                };
+                xhttp.send(new XMLSerializer().serializeToString(xmlDoc));
+            } else {
+                reject(new Error(`Tag <${tagName}> not found in XML`));
+            }
+        }).catch(error => reject(error));
+    });
+}
+-->

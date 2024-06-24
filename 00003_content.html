@@ -5,9 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" type="text/css" href="css/content.css">
+    <link rel="stylesheet" type="text/css" href="css/expand.css">
+    <link rel="stylesheet" type="text/css" href="css/unitController.css">
 </head>
-<!--<script src="00006_floorSet.js" defer></script>-->
-<script src="00005_imgicon.js" defer></script>
+<script type="module" src="00005_imgicon.js" defer></script>
+<script src="00006_expand.js" defer></script>
+<script type="module" src="00007_controller.js" defer></script>
 <body>
     <div class="content">
         <div class="item_left">
@@ -38,9 +41,7 @@
             <button>操作可能ユニット全部選択</button>
         </div>
     </div>
-    <!--
-    
-    -->
+
     <div class="content">
         <div class="filter_icon" >
             <button>
@@ -48,17 +49,19 @@
             </button>
             <div id = "filterButton"></div>
         </div>
-        <div class="main_body">
-            <div id="imageContainer" >
+        <div id="main_body" >
+            <div id="expand">
+                <div id="imageContainer" >
+                </div>
             </div>
         </div>
     </div>
-    <div id="expand" >
-        <button>拡大</button>
-        <button>縮小</button>
-        <button>戻り</button>
+    <div id="expandDiv" >
+        <button id="expandButton" onclick="elementZoomIn();" ><img id="expandImg" src="image_icon/expandIcon/plus_icon.png"></button>
+        <button id="expandButton" onclick="elementZoomOut();" ><img id="expandImg" src="image_icon/expandIcon/minus_icon.png"></button>
+        <button id="expandButton" onclick="elementZoomReset();" ><img id="expandImg" src="image_icon/expandIcon/reset_icon.png"></button>
     </div>
-    <footer>
+    <footer id="controllerSimple">
         <div>
             <button>
                 <img id="driveButton" src="image_icon/controllButton/driveON_button.png">
@@ -72,8 +75,8 @@
                 26℃
             </div>
             <div id = "tempSetButton">
-                <button>上</button>
-                <button>下</button>
+                <button id="tempUpButton">上</button>
+                <button id="tempDownButton">下</button>
             </div>
         </div>
         <div>

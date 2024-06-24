@@ -1,4 +1,4 @@
-
+import { controllerButtonOutput } from "./00007_controller.js";
  // XMLファイルを呼んでくる
  function loadXMLDoc(filename) {
     return new Promise((resolve, reject) => {
@@ -15,7 +15,6 @@
         xhttp.send();
     });
 }
-
 // XMLファイルを呼んできて、イメージを追加する関数。
 async function displayFloorIconSetting(selectedFloor) {
     try {
@@ -24,11 +23,12 @@ async function displayFloorIconSetting(selectedFloor) {
 
         const xmlModel = await loadXMLDoc('xml/model.xml');
         const models = xmlModel.getElementsByTagName('ctrl');
-
+        const controllerSimple = document.getElementById('controllerSimple');
         const imageContainer = document.getElementById('imageContainer'); 
         const filterButton = document.getElementById('filterButton');
         filterButton.innerHTML = '';
-        imageContainer.innerHTML = ''; //既存のイメージとテキストを消します。
+        imageContainer.innerHTML = '';
+         //既存のイメージとテキストを消します。
         
 
         for (let i = 0; i < images.length; i++) {
@@ -76,20 +76,12 @@ async function displayFloorIconSetting(selectedFloor) {
                     //モデル情報呼び出し
                     const tempText = document.createElement('p');
                     tempText.textContent = `Temp: ${temp}°C / Model:${model}`;
-                    //tempText.style.position = 'absolute';
-                    //tempText.style.left = `${x}px`;
-                    tempText.style.top = `80px`;
+                    tempText.style.top = -`80px`;
                     button.appendChild(tempText);
-
+                    
                     //버튼을 눌렀을 때 이미지 노란색으로 변함
                     button.addEventListener('click', function() {
-                        if (button.style.backgroundColor === 'yellow') {//버튼이 노랑색일 때
-                            button.style.backgroundColor = 'white';
-                            document.getElementById("controller").style.visibility ='hidden';
-                        } else {
-                            button.style.backgroundColor = 'yellow';//버튼이 하얀색일 때 노란색으로 바꿈
-                            document.getElementById("controller").style.visibility ='visible';		
-                        }
+                        controllerButtonOutput(button,controllerSimple);
                     });
                     imageContainer.appendChild(button);
                 }
@@ -126,13 +118,11 @@ async function floorSystemSetting() {
             //このように文字数の制限ができる。
             select.appendChild(option);
         }
-        
         floorSet.appendChild(select);
     } catch (error) {
         console.error(error);
     }
 }
-
 //아이콘 구별 후 src반환
 async function icon_distinguish(iconNumber){
     try{
@@ -153,7 +143,6 @@ async function icon_distinguish(iconNumber){
     return 'image_icon/noSignal_icon.png';
     }
 }
-
 //모델xml에 에러가 on일경우 기종을 무시하고 에러아이콘 표시
 async function iconError(){
     try{
@@ -174,7 +163,6 @@ async function iconError(){
     return 'image_icon/noSignal_icon.png';
     }
 }
-
 // ページがロードされるとイメージとテキストを呼び出す。
 window.onload = function() {
     floorSystemSetting();
