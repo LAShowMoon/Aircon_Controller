@@ -54,7 +54,7 @@
 </footer>
 </body>
 </html>
-<!-- 메인 자바스 코드 
+
 <script>
 import { loadXMLDoc, updateXMLDoc } from './xmlHandler.js';
 // 초기 온도를 설정하는 함수
@@ -110,44 +110,3 @@ document.addEventListener('DOMContentLoaded', () => {
     okButton.addEventListener('click', saveTemperature);
 });
 </script>
--->
-
-<!--
-export function loadXMLDoc(filename) {
-    return new Promise((resolve, reject) => {
-        const xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                resolve(this.responseXML);
-            } else if (this.readyState == 4) {
-                reject(new Error('Failed to load XML file'));
-            }
-        };
-        xhttp.open("GET", filename, true);
-        xhttp.send();
-    });
-}
-export function updateXMLDoc(filename, tagName, value) {
-    return new Promise((resolve, reject) => {
-        loadXMLDoc(filename).then(xmlDoc => {
-            const tempElement = xmlDoc.getElementsByTagName(tagName)[0];
-            if (tempElement) {
-                tempElement.textContent = value;
-                const xhttp = new XMLHttpRequest();
-                xhttp.open("POST", filename, true);
-                xhttp.setRequestHeader("Content-Type", "application/xml");
-                xhttp.onreadystatechange = function() {
-                    if (this.readyState == 4 && this.status == 200) {
-                        resolve();
-                    } else if (this.readyState == 4) {
-                        reject(new Error('Failed to update XML file'));
-                    }
-                };
-                xhttp.send(new XMLSerializer().serializeToString(xmlDoc));
-            } else {
-                reject(new Error(`Tag <${tagName}> not found in XML`));
-            }
-        }).catch(error => reject(error));
-    });
-}
--->

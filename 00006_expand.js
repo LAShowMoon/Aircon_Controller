@@ -6,7 +6,7 @@ function elementZoomOut() {
   // 화면크기 최대 축소율 0.7배
   if (elementZoom < 0.7) {
     elementZoom = 0.7; 
-    alert("더 이상 축소할 수 없습니다.");
+    alert("これ以上縮小できません。");
   }
   applyElementZoom();
 }
@@ -17,7 +17,7 @@ function elementZoomIn() {
   // 화면크기 최대 확대율 2배
   if (elementZoom > 2) {
     elementZoom = 2;
-    alert("더 이상 확대할 수 없습니다.");
+    alert("これ以上拡大できません。");
   }
   applyElementZoom();
 }

@@ -1,20 +1,5 @@
 import { controllerButtonOutput } from "./00007_controller.js";
- // XMLファイルを呼んでくる
- function loadXMLDoc(filename) {
-    return new Promise((resolve, reject) => {
-        const xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            console.log(this.readyState);
-            if (this.readyState == 4 && this.status == 200) {
-                resolve(this.responseXML);
-            } else if (this.readyState == 4) {
-                reject(new Error('Failed to load XML file'));
-            }
-        };
-        xhttp.open("GET", filename, true);
-        xhttp.send();
-    });
-}
+import { loadXMLDoc,updateXMLDoc } from "./00008_xmlfileRequest.js";
 // XMLファイルを呼んできて、イメージを追加する関数。
 async function displayFloorIconSetting(selectedFloor) {
     try {
@@ -30,7 +15,6 @@ async function displayFloorIconSetting(selectedFloor) {
         imageContainer.innerHTML = '';
          //既存のイメージとテキストを消します。
         
-
         for (let i = 0; i < images.length; i++) {
             const imageGroup = images[i].getAttribute('Group');
             const imageFloor = images[i].getAttribute('floor');
@@ -74,14 +58,14 @@ async function displayFloorIconSetting(selectedFloor) {
                     filterButton.appendChild(filterBT);
 
                     //モデル情報呼び出し
-                    const tempText = document.createElement('p');
-                    tempText.textContent = `Temp: ${temp}°C / Model:${model}`;
-                    tempText.style.top = -`80px`;
-                    button.appendChild(tempText);
+                    const modelText = document.createElement('p');
+                    modelText.textContent = `Temp: ${temp}°C / Model:${model}`;
+                    modelText.style.top = -`80px`;
+                    button.appendChild(modelText);
                     
                     //버튼을 눌렀을 때 이미지 노란색으로 변함
                     button.addEventListener('click', function() {
-                        controllerButtonOutput(button,controllerSimple);
+                        controllerButtonOutput(button,controllerSimple,temp);
                     });
                     imageContainer.appendChild(button);
                 }

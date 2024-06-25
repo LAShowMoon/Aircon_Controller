@@ -43,11 +43,18 @@
     </div>
 
     <div class="content">
-        <div class="filter_icon" >
-            <button>
-                <img id="img_item" src="image_icon/filterIcon/ALL_filter_icon.png" alt="error" >
-            </button>
-            <div id = "filterButton"></div>
+        <div>
+            <div class="filter_icon" >
+                <button>
+                    <img id="img_item" src="image_icon/filterIcon/ALL_filter_icon.png" alt="error" >
+                </button>
+                <div id = "filterButton"></div>
+            </div>
+            <div id="expandDiv" >
+                <button id="expandButton" onclick="elementZoomIn();" ><img id="expandImg" src="image_icon/expandIcon/plus_icon.png"></button>
+                <button id="expandButton" onclick="elementZoomOut();" ><img id="expandImg" src="image_icon/expandIcon/minus_icon.png"></button>
+                <button id="expandButton" onclick="elementZoomReset();" ><img id="expandImg" src="image_icon/expandIcon/reset_icon.png"></button>
+            </div>
         </div>
         <div id="main_body" >
             <div id="expand">
@@ -56,11 +63,7 @@
             </div>
         </div>
     </div>
-    <div id="expandDiv" >
-        <button id="expandButton" onclick="elementZoomIn();" ><img id="expandImg" src="image_icon/expandIcon/plus_icon.png"></button>
-        <button id="expandButton" onclick="elementZoomOut();" ><img id="expandImg" src="image_icon/expandIcon/minus_icon.png"></button>
-        <button id="expandButton" onclick="elementZoomReset();" ><img id="expandImg" src="image_icon/expandIcon/reset_icon.png"></button>
-    </div>
+
     <footer id="controllerSimple">
         <div>
             <button>
