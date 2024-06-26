@@ -9,37 +9,18 @@ export function controllerButtonOutput(button,controllerSimple,temp){
     } else {
         button.style.backgroundColor = 'yellow';//버튼이 하얀색일 때 노란색으로 바꿈
         controllerSimple.style.display = 'flex';
-        document.addEventListener('DOMContentLoaded', () => {
-            // 초기 온도 설정
-            document.getElementById('temp').textContent = `${temp}℃`;
-        
-            // 상/하 버튼 요소 가져오기
-            const tempUpButton = document.getElementById('tempUpButton');
-            const tempDownButton = document.getElementById('tempDownButton');
-           //   const okButton = document.querySelector('button:contains("OK")');
-        
-            // 상 버튼 클릭 이벤트 리스너 추가
-            tempUpButton.addEventListener('click', () => {
-                updateTemperature(1);
-            });
-        
-            // 하 버튼 클릭 이벤트 리스너 추가
-            tempDownButton.addEventListener('click', () => {
-                updateTemperature(-1);
-            });
-        
             // OK 버튼 클릭 이벤트 리스너 추가
-            //    okButton.addEventListener('click', saveTemperature);
-        });
+            // okButton.addEventListener('click', saveTemperature);
     }
 }
 // 온도 조절 함수 정의
-function updateTemperature(delta) {
+export function updateTemperature(delta) {
     const tempDisplay = document.getElementById('temp');
     let currentTemp = parseInt(tempDisplay.textContent);
     currentTemp += delta;
     tempDisplay.textContent = `${currentTemp}℃`;
 }
+
 async function saveTemperature() {
     const tempDisplay = document.getElementById('temp');
     const currentTemp = parseInt(tempDisplay.textContent);

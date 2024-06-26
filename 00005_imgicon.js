@@ -1,4 +1,4 @@
-import { controllerButtonOutput } from "./00007_controller.js";
+import { controllerButtonOutput,updateTemperature } from "./00007_controller.js";
 import { loadXMLDoc,updateXMLDoc } from "./00008_xmlfileRequest.js";
 // XMLファイルを呼んできて、イメージを追加する関数。
 async function displayFloorIconSetting(selectedFloor) {
@@ -66,6 +66,20 @@ async function displayFloorIconSetting(selectedFloor) {
                     //버튼을 눌렀을 때 이미지 노란색으로 변함
                     button.addEventListener('click', function() {
                         controllerButtonOutput(button,controllerSimple,temp);
+                        document.getElementById('temp').textContent = `${temp}℃`;
+                        const tempUpButton = document.getElementById('tempUpButton');
+                        const tempDownButton = document.getElementById('tempDownButton');
+                        //const okButton = document.querySelector('button:contains("OK")');
+                        
+                        // 상 버튼 클릭 이벤트 리스너 추가
+                        tempUpButton.addEventListener('click', () => {
+                            updateTemperature(1);
+                        });
+                    
+                        // 하 버튼 클릭 이벤트 리스너 추가
+                        tempDownButton.addEventListener('click', () => {
+                            updateTemperature(-1);
+                        });
                     });
                     imageContainer.appendChild(button);
                 }
